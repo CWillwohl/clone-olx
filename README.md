@@ -4,6 +4,6 @@
 
 ### Modulos utilizados: Redux, Router, js-Cookie, Styled-Components.
 
-Treinamento efetuado na disciplina *Desenvolvimento WEB II* do curso de _Analise e Desenvolvimento de Sistemas_ do [IFSP](https://ifspcaraguatatuba.edu.br/)
+Treinamento efetuado na disciplina _Desenvolvimento WEB II_ do curso de _Analise e Desenvolvimento de Sistemas_ do [IFSP](https://ifspcaraguatatuba.edu.br/)
 
-_autor: Caio Willwohl Perez Ribeiro_
+_autor: Denny Paulista Azevedo Filho_
