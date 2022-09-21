@@ -6,4 +6,4 @@
 
 Treinamento efetuado na disciplina _Desenvolvimento WEB II_ do curso de _Analise e Desenvolvimento de Sistemas_ do [IFSP](https://ifspcaraguatatuba.edu.br/)
 
-_autor: Denny Paulista Azevedo Filho_
+_autor: Caio Willwohl Perez Ribeiro_
