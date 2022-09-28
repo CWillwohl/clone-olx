@@ -7,7 +7,6 @@ export const PageArea = styled.div`
         padding: 10px;
         box-shadow: 0px 0px 3px #999;
         margin-bottom: 20px;
-        
         .area {
             display: flex;
             align-items: center;
