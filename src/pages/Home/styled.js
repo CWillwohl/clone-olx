@@ -1,58 +1,104 @@
 import styled from 'styled-components'
 
 export const PageArea = styled.div`
-    form {
-        background-color: #FFF;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0px 0px 3px #999;
-        margin-bottom: 20px;
-        .area {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            max-width: 500px;
+    h2 {
+        font-size: 20px;
+    }
 
-            .area--title {
-                width: 200px;
-                text-align: right;
-                padding-right: 20px;
-                font-weight: bold;
-                font-size: 14px;
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+
+        .aditem {
+            width: 25%;
+        }
+    }
+
+    .seeAllLink {
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 10px;
+    }
+`
+
+export const SearchArea = styled.div`
+    background-color: #ddd;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+
+    .searchBox {
+        background-color: #9bb83c;
+        padding: 20px 15px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px 0.3px rgba(0, 0, 0, 0.2);
+        display: flex;
+
+        form {
+            flex: 1%;
+            display: flex;
+
+            input, select {
+                height: 40px;
+                border: 0;
+                border-radius: 5px;
+                outline: 0;
+                font-size: 15px;
+                color: #000;
+                margin-right: 20px;
             }
 
-            .area--input {
+            input {
                 flex: 1;
+                padding: 0 10px;
+            }
 
-                input {
-                    width: 100%;
-                    font-size: 14px;
-                    padding: 5px;
-                    border: 1px solid #DDD;
-                    border-radius: 3px;
-                    outline: none;
+            select {
+                width: 100px;
+            }
 
-                    &:focus {
-                        border: 1px solid #333;
-                        color: #333;
-                    }
-                }
+            button {
+                background-color: #49aeef;
+                font-size: 15px;
+                border: 0;
+                border-radius: 5px;
+                color: #fff;
+                height: 40px;
+                padding: 0 20px;
+                cursor: pointer;
 
-                button {
-                    background-color: #0089FF;
-                    border: 0;
-                    outline: 0;
-                    padding: 5px 10px;
-                    border-radius: 4px;
-                    color: #FFF;
-                    font-size: 15px;
-                    cursor: pointer;
-
-                    &:hover {
-                        background-color: #006FCE;
-                    }
+                &:hover {
+                    background-color: #429fdb;
                 }
             }
         }
     }
-`  
+
+    .categoryList {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+
+        .categoryItem {
+            width: 25%;
+            display: flex;
+            align-items: center;
+            color: #000;
+            text-decoration: none;
+            height: 50px;
+            margin-bottom: 10px;
+
+            &:hover {
+                color: #999;
+            }
+
+            img {
+                width: 40px;
+                height: 45px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+`
