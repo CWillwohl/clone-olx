@@ -38,8 +38,34 @@ const Page = () => {
         e.preventDefault();
         setDisabled(true);
         setError('');
-        
-        
+        let errors = [];
+        if(!title.trim()){
+            errors.push("O título é obrigatório");
+        }
+        if(!category.trim()){
+            errors.push("É obrigatório escolher uma categoria");
+        }
+        if(errors.length === 0) {
+            const fData = new FormData();
+            fData.append("title", title);
+            fData.append("price", price);
+            fData.append("priceneg", priceNegotiable);
+            fData.append("desc", description);
+            fData.append("cat", category);
+            if(fileField.current.files.length > 0) {
+                for(let i = 0; i < fileField.current.files.length; i++){
+                    fData.append("img", fileField.current.files[i]);
+                }
+            }
+            const response = await api.addAd(fData);
+            if(!response.error) {
+                history.push(`/ad/${response.id}`);
+            } else {
+                setError(response.error);
+            }
+        } else {
+            setError(errors.join("\n"));
+        }
         setDisabled(false);
     }
 
