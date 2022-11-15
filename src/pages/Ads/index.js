@@ -1,6 +1,7 @@
 import 
 	React, 
-	{ useState, 
+	{ 
+	useState, 
 	useEffect 
 } from 'react';
 import { PageArea } from './styled';
@@ -13,14 +14,15 @@ let timer;
 const Page = () => {
 	const api = useApi();
 	const history = useHistory();
-
+	
 	const useQueryString = () => {
 		return new URLSearchParams(useLocation().search);
 	}
 
 	const query = useQueryString();
-	const [q, setQ] = useState(query.get('q') != null ? query.get('q') : "");
-	const [cat, setCat] = useState(query.get('cat') != null ? query.get('cat') : '');
+	
+	const [q, setQ] = useState(query.get('q') != null ? query.get('q'): '');
+	const [cat,setCat] = useState(query.get('cat') != null ? query.get('cat') : '');
 	const [state, setState] = useState(query.get('state') != null ? query.get('state') : '');
 
 	useEffect(() => {
@@ -40,7 +42,6 @@ const Page = () => {
 		if(timer) {
 			clearTimeout(timer);
 		}
-
 		timer = setTimeout(getAdsList, 1000);
 		setResultOpacity(0.3);
 		setCurrentPage(1);
@@ -53,9 +54,9 @@ const Page = () => {
 	const [resultOpacity, setResultOpacity] = useState(1);
 	const [adsTotal, setAdsTotal] = useState(0);
 	const [pageCount, setPageCount] = useState(0);
-	const [warningMessage, setWarningMessage] = useState("carregando....");
-	const [loading, setLoading] = useState(true);
-	
+	const [warningMessage, setWarningMessage] = useState("Carregando....");
+	const[loading, setLoading] = useState(true);
+
 	useEffect(() => {
 		const getState = async () => {
 			const sList = await api.getState();
@@ -72,25 +73,13 @@ const Page = () => {
 		getCategories();
 	}, []);
 
-	useEffect(() => {
-		const getRecentAds = async () => {
-			const json = await api.getAds({
-				sort: 'desc',
-				limit: 8
-			});
-			setAdList(json.ads);
-		}
-			getRecentAds();
-	}, []);
-
-
 	const getAdsList = async () => {
 		setLoading(true);
 		let offset = 0;
 		offset = (currentPage - 1) * 9;
 		const Ads = await api.getAds({
-			sort:'desc',
-			limit:9,
+			sort: 'desc',
+			limit: 9,
 			q,
 			cat,
 			state,
@@ -104,7 +93,7 @@ const Page = () => {
 
 	useEffect(() => {
 		if(adsTotal > 0) {
-			setPageCount(Math.ceil(adsTotal / getAdsList.length))
+			setPageCount(Math.ceil(adsTotal / adList.length));
 		} else {
 			setPageCount(0)
 		}
@@ -116,8 +105,8 @@ const Page = () => {
 	}, [currentPage]);
 
 	let pagination = [];
-	for(let i = 0; i <= pageCount; i++){
-		pagination.push(i + 1)
+	for(let i = 0; i <= pageCount; i++) {
+		pagination.push(i + 1);
 	}
 
 	return (
@@ -126,11 +115,11 @@ const Page = () => {
 				<div className='leftSide'>
 					<form method='GET'>
 						<input 
-						type='q'
-						name='q'
-						placeholder='O que você procura?'
-						value={q}
-						onChange={(e) => setQ(e.target.value)}
+							type='text'
+							name='q'
+							placeholder='O que você procura?'
+							value={q}
+							onChange={(e) => setQ(e.target.value)}
 						/>
 						<div className='filterName'>Estado:</div>
 						<select
@@ -145,31 +134,46 @@ const Page = () => {
 								</option>
 							)}
 						</select>
+						<div className='filterName'>Categoria:</div>
+						<ul>
+							{categories.map((category, index) => 
+								<li
+									key={index}
+									className={cat === category.slug ? 'categoryItem active' : 'categoryItem'}
+									onClick={() => setCat(category.slug)}
+								>
+									<img src={category.img} alt='' />
+									<span>{category.name}</span>
+								</li>
+							)}
+						</ul>
 					</form>
 				</div>
 				<div className='rightSide'>
 					<h2>Resultados</h2>
 					{loading && adList.length === 0 &&
 						<div className='ListWarning'>
-							Carregando....
-						</div>	
+							Carregando...
+						</div>
 					}
 					{!loading && adList.length === 0 &&
 						<div className='ListWarning'>
 							nenhum Resultado Encontrado
 						</div>
 					}
-					<div className='list' style={{ opacity: resultOpacity}}>
-						{adList.map((ad, index) =>
+					<div className='list' style={{ opacity: resultOpacity }}>
+						{adList.map((ad, index) => 
 							<AdItem key={index} data={ad} />
 						)}
 					</div>
 					<div className='pagination'>
-						{pagination.map((pg, index) =>
+						{pagination.map((pg, index) => 
 							<div
-								onClick={() => setCurrentPage(pg)
-								}
-							>
+								onClick={() => setCurrentPage(pg)}
+								key={index}
+								className={pg === currentPage ? 'pagItem active' : 'pagItem'}
+							> 
+								{pg}
 							</div>
 						)}
 					</div>
